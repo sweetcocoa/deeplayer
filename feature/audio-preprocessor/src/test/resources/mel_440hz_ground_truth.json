@@ -1,0 +1,21 @@
+{
+  "description": "Ground truth mel spectrogram values for a 440Hz sine wave at 16kHz, 1 second duration",
+  "parameters": {
+    "frequency_hz": 440,
+    "sample_rate": 16000,
+    "duration_seconds": 1.0,
+    "window_size": 400,
+    "hop_size": 160,
+    "num_mel_bands": 80,
+    "fft_size": 512
+  },
+  "validation": {
+    "expected_num_frames": 98,
+    "peak_mel_band_min": 10,
+    "peak_mel_band_max": 20,
+    "peak_energy_threshold": -5.0,
+    "non_peak_energy_max": -8.0,
+    "tolerance_percent": 1.0,
+    "tolerance_absolute": 0.01
+  }
+}

@@ -1,0 +1,42 @@
+## IDE / Editor
+*.iml
+/.idea
+*.swp
+*~
+
+## Gradle
+.gradle/
+.gradle-home/
+/build/
+/*/build/
+/*/*/build/
+
+## Android
+/local.properties
+local.properties
+/captures
+.externalNativeBuild
+.cxx
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Kotlin
+.kotlin/
+
+## Claude Code (local config)
+.claude/settings.local.json
+.claude/hooks/
+
+## Model files (use git-lfs)
+*.tflite
+*.onnx
+*.ggml
+
+## Audio test resources
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.aac

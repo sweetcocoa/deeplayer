@@ -1,0 +1,58 @@
+build:
+  maxIssues: 0
+
+complexity:
+  LongMethod:
+    threshold: 100
+  LongParameterList:
+    functionThreshold: 8
+    constructorThreshold: 10
+  TooManyFunctions:
+    thresholdInFiles: 30
+    thresholdInClasses: 25
+  CyclomaticComplexMethod:
+    threshold: 60
+  ComplexCondition:
+    threshold: 5
+  NestedBlockDepth:
+    threshold: 5
+
+naming:
+  FunctionNaming:
+    functionPattern: "[a-zA-Z][a-zA-Z0-9]*"
+  TopLevelPropertyNaming:
+    constantPattern: "[A-Z][A-Za-z0-9_]*"
+
+style:
+  MagicNumber:
+    active: false
+  MaxLineLength:
+    maxLineLength: 120
+  WildcardImport:
+    active: true
+  ReturnCount:
+    max: 6
+  UnusedPrivateMember:
+    active: true
+    ignoreAnnotated:
+      - "Preview"
+  LoopWithTooManyJumpStatements:
+    maxJumpCount: 3
+
+exceptions:
+  TooGenericExceptionCaught:
+    exceptionNames:
+      - "ArrayIndexOutOfBoundsException"
+      - "Error"
+      - "IllegalMonitorStateException"
+      - "IndexOutOfBoundsException"
+      - "NullPointerException"
+      - "RuntimeException"
+      - "Throwable"
+  SwallowedException:
+    ignoredExceptionTypes:
+      - "InterruptedException"
+      - "MalformedURLException"
+      - "NumberFormatException"
+      - "ParseException"
+      - "Throwable"
