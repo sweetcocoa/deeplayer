@@ -18,12 +18,23 @@ local.properties
 .externalNativeBuild
 .cxx
 
+## Signing
+*.jks
+*.keystore
+keystore.properties
+
 ## OS
 .DS_Store
 Thumbs.db
 
 ## Kotlin
 .kotlin/
+
+## NDK / C++ build artifacts
+*.o
+*.a
+*.so
+*.dylib
 
 ## Claude Code (local config)
 .claude/settings.local.json
