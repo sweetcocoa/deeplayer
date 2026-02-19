@@ -59,42 +59,6 @@ class FakeAudioPreprocessorTest {
   }
 
   @Test
-  fun extractMelSpectrogram_returnsCorrectShape() {
-    val pcm = fake.decodeToPcm("/any/path.wav")
-    val mel = fake.extractMelSpectrogram(pcm)
-
-    val expectedFrames =
-      (pcm.size - FakeAudioPreprocessor.WINDOW_SIZE) / FakeAudioPreprocessor.HOP_SIZE + 1
-    assertThat(mel.size).isEqualTo(expectedFrames * FakeAudioPreprocessor.NUM_MEL_BANDS)
-  }
-
-  @Test
-  fun extractMelSpectrogram_returnsFiniteValues() {
-    val pcm = fake.decodeToPcm("/any/path.wav")
-    val mel = fake.extractMelSpectrogram(pcm)
-    for (value in mel) {
-      assertThat(value.isFinite()).isTrue()
-    }
-  }
-
-  @Test
-  fun extractMelSpectrogram_valuesAreNegative_logMelDomain() {
-    val pcm = fake.decodeToPcm("/any/path.wav")
-    val mel = fake.extractMelSpectrogram(pcm)
-    // Log-mel values should be negative for the fake (energy < 1)
-    for (value in mel) {
-      assertThat(value).isLessThan(0.0f)
-    }
-  }
-
-  @Test
-  fun extractMelSpectrogram_shortInput_returnsEmpty() {
-    val shortPcm = FloatArray(100)
-    val mel = fake.extractMelSpectrogram(shortPcm)
-    assertThat(mel).isEmpty()
-  }
-
-  @Test
   fun segmentPcm_preservesAllData() {
     val pcm = FloatArray(16000 * 65) { it.toFloat() }
     val chunks = fake.segmentPcm(pcm, chunkDurationMs = 30000)

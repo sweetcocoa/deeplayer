@@ -57,4 +57,11 @@ class FakePlayerService : PlayerService {
   override fun stop() {
     _playbackState.value = PlaybackState()
   }
+
+  var lastSpeed: Float = 1.0f
+    private set
+
+  override fun setPlaybackSpeed(speed: Float) {
+    lastSpeed = speed
+  }
 }

@@ -92,11 +92,18 @@ constructor(@ApplicationContext private val context: Context, private val trackD
     _playbackState.value = PlaybackState()
   }
 
+  override fun setPlaybackSpeed(speed: Float) {
+    exoPlayer?.setPlaybackParameters(
+      androidx.media3.common.PlaybackParameters(speed.coerceIn(0.5f, 2.0f))
+    )
+  }
+
   private fun updateState() {
     val player = exoPlayer ?: return
     val status =
       when {
         player.isPlaying -> PlaybackStatus.PLAYING
+        player.playbackState == Player.STATE_ENDED -> PlaybackStatus.COMPLETED
         player.playbackState == Player.STATE_READY -> PlaybackStatus.PAUSED
         else -> PlaybackStatus.STOPPED
       }
@@ -135,6 +142,7 @@ constructor(@ApplicationContext private val context: Context, private val trackD
       album = entity.album,
       durationMs = entity.durationMs,
       filePath = entity.filePath,
+      albumArtUri = entity.albumArtUri,
     )
   }
 

@@ -59,6 +59,7 @@ enum class PlaybackStatus {
   STOPPED,
   PLAYING,
   PAUSED,
+  COMPLETED,
 }
 
 data class PlaybackState(
@@ -81,7 +82,12 @@ data class TrackMetadata(
   val album: String,
   val durationMs: Long,
   val filePath: String,
+  val albumArtUri: String? = null,
 )
+
+// --- Whisper Transcription ---
+
+data class TranscribedSegment(val text: String, val startMs: Long, val endMs: Long)
 
 // --- Language ---
 
@@ -91,19 +97,3 @@ enum class Language {
   MIXED,
 }
 
-// --- Inference ---
-
-enum class Backend {
-  AUTO,
-  CPU,
-  GPU,
-  NPU,
-}
-
-data class InferenceConfig(
-  val preferredBackend: Backend = Backend.AUTO,
-  val numThreads: Int = 4,
-  val enableFp16: Boolean = true,
-)
-
-data class BackendInfo(val backend: Backend, val delegateName: String, val estimatedSpeedup: Float)

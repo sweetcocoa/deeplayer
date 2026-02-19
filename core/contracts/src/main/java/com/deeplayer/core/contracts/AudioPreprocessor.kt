@@ -23,7 +23,4 @@ interface AudioPreprocessor {
     }
     return chunks
   }
-
-  /** Convert PCM to 80-band Log-Mel Spectrogram (Whisper compatible). */
-  fun extractMelSpectrogram(pcm: FloatArray): FloatArray
 }

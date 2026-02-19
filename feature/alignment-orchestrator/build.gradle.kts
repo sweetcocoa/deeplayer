@@ -17,6 +17,22 @@ android {
   }
 
   kotlinOptions { jvmTarget = "17" }
+
+  testOptions {
+    unitTests.all {
+      val nativeLib = System.getProperty("whisper.native.lib") ?: ""
+      it.systemProperty("whisper.native.lib", nativeLib)
+      it.systemProperty("whisper.model.path", System.getProperty("whisper.model.path") ?: "")
+      it.systemProperty("whisper.pcm.path", System.getProperty("whisper.pcm.path") ?: "")
+      it.systemProperty("whisper.lyrics.path", System.getProperty("whisper.lyrics.path") ?: "")
+      it.systemProperty("whisper.language", System.getProperty("whisper.language") ?: "")
+      // Add native lib directory to java.library.path for WhisperNative System.loadLibrary
+      if (nativeLib.isNotEmpty()) {
+        val libDir = file(nativeLib).parentFile?.absolutePath ?: ""
+        it.jvmArgs("-Djava.library.path=$libDir")
+      }
+    }
+  }
 }
 
 dependencies {
@@ -33,6 +49,7 @@ dependencies {
   implementation(libs.hilt.android)
   ksp(libs.hilt.compiler)
 
+  testImplementation(project(":feature:inference-engine"))
   testImplementation(libs.junit)
   testImplementation(libs.truth)
   testImplementation(libs.mockk)

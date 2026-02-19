@@ -7,10 +7,7 @@ import org.junit.Test
 
 /**
  * Tests for the AudioPreprocessor contract using FakeAudioPreprocessor. Validates format coverage,
- * mel spectrogram properties, chunk segmentation, and JNI interface compatibility.
- *
- * NativeAudioPreprocessor tests require the NDK-built native library and are covered by
- * androidTest.
+ * chunk segmentation, and interface compatibility.
  */
 class AudioPreprocessorTest {
 
@@ -74,42 +71,6 @@ class AudioPreprocessorTest {
   fun decodeToPcm_aacFormat_returnsValidPcm() {
     val pcm = preprocessor.decodeToPcm("/fake/audio.aac")
     assertThat(pcm.size).isGreaterThan(0)
-  }
-
-  // --- Mel spectrogram accuracy: 440Hz sine wave ---
-
-  @Test
-  fun extractMelSpectrogram_440hzSine_returnsCorrectDimensions() {
-    val pcm = FakeAudioPreprocessor.generate440HzSine(1.0f, 16000)
-    val mel = preprocessor.extractMelSpectrogram(pcm)
-
-    // Expected frames: (16000 - 400) / 160 + 1 = 98
-    val expectedFrames = (pcm.size - 400) / 160 + 1
-    assertThat(mel.size).isEqualTo(expectedFrames * 80)
-  }
-
-  @Test
-  fun extractMelSpectrogram_returnsNonEmptyForValidInput() {
-    val pcm = FakeAudioPreprocessor.generate440HzSine(1.0f, 16000)
-    val mel = preprocessor.extractMelSpectrogram(pcm)
-    assertThat(mel).isNotEmpty()
-  }
-
-  @Test
-  fun extractMelSpectrogram_returnsFiniteValues() {
-    val pcm = FakeAudioPreprocessor.generate440HzSine(1.0f, 16000)
-    val mel = preprocessor.extractMelSpectrogram(pcm)
-    for (value in mel) {
-      assertThat(value.isFinite()).isTrue()
-      assertThat(value.isNaN()).isFalse()
-    }
-  }
-
-  @Test
-  fun extractMelSpectrogram_emptyInputTooShort_returnsEmpty() {
-    val shortPcm = FloatArray(100) // Less than window size of 400
-    val mel = preprocessor.extractMelSpectrogram(shortPcm)
-    assertThat(mel).isEmpty()
   }
 
   // --- Chunk segmentation: 210s PCM -> 7 chunks, offset continuity ---
@@ -176,20 +137,11 @@ class AudioPreprocessorTest {
     assertThat(chunks[3].data.size).isEqualTo(sampleRate * 5)
   }
 
-  // --- JNI interface compatibility ---
+  // --- Interface compatibility ---
 
   @Test
   fun preprocessor_implementsAudioPreprocessorInterface() {
-    // Verify the fake and native both implement the contract
     assertThat(FakeAudioPreprocessor()).isInstanceOf(AudioPreprocessor::class.java)
-  }
-
-  @Test
-  fun nativeAudioPreprocessor_implementsAudioPreprocessorInterface() {
-    // Compile-time check: NativeAudioPreprocessor implements AudioPreprocessor
-    // Cannot instantiate here without native lib, but verify the class exists
-    val clazz = NativeAudioPreprocessor::class.java
-    assertThat(AudioPreprocessor::class.java.isAssignableFrom(clazz)).isTrue()
   }
 
   @Test

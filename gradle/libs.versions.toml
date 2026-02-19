@@ -18,6 +18,7 @@ media3 = "1.5.1"
 # Hilt
 hilt = "2.53.1"
 hiltNavigationCompose = "1.2.0"
+navigationCompose = "2.8.5"
 
 # Room
 room = "2.6.1"
@@ -28,6 +29,9 @@ workManager = "2.10.0"
 # ML / Inference
 litert = "1.0.1"
 onnxruntime = "1.19.0"
+
+# Image Loading
+coil = "2.7.0"
 
 # Coroutines
 coroutines = "1.9.0"
@@ -62,6 +66,8 @@ compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-mani
 compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-animation = { group = "androidx.compose.animation", name = "animation" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
 # Media3
 media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3" }
@@ -87,6 +93,9 @@ litert = { group = "com.google.ai.edge.litert", name = "litert-api", version.ref
 litert-gpu = { group = "com.google.ai.edge.litert", name = "litert-gpu", version.ref = "litert" }
 onnxruntime-android = { group = "com.microsoft.onnxruntime", name = "onnxruntime-android", version.ref = "onnxruntime" }
 onnxruntime = { group = "com.microsoft.onnxruntime", name = "onnxruntime", version.ref = "onnxruntime" }
+
+# Image Loading
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 # Coroutines
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }

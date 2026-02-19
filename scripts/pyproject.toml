@@ -1,0 +1,15 @@
+[project]
+name = "deeplayer-scripts"
+version = "0.1.0"
+description = "Model export and utility scripts for Deeplayer"
+requires-python = ">=3.9"
+dependencies = [
+    "torch>=2.0",
+    "transformers>=4.30",
+    "onnx>=1.14",
+    "onnxruntime>=1.15",
+    "onnxscript>=0.1",
+]
+
+[dependency-groups]
+dev = []

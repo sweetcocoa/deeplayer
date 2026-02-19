@@ -17,4 +17,7 @@ interface PlayerService {
 
   /** Stop playback and release resources. */
   fun stop()
+
+  /** Set playback speed (0.5f to 2.0f). */
+  fun setPlaybackSpeed(speed: Float)
 }

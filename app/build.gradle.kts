@@ -35,6 +35,8 @@ android {
   kotlinOptions { jvmTarget = "17" }
 
   buildFeatures { compose = true }
+
+  androidResources { noCompress += listOf("bin") }
 }
 
 dependencies {
@@ -42,7 +44,6 @@ dependencies {
   implementation(project(":core:player"))
   implementation(project(":feature:audio-preprocessor"))
   implementation(project(":feature:inference-engine"))
-  implementation(project(":feature:lyrics-aligner"))
   implementation(project(":feature:alignment-orchestrator"))
   implementation(project(":feature:lyrics-ui"))
 
@@ -52,7 +53,12 @@ dependencies {
   implementation(platform(libs.compose.bom))
   implementation(libs.compose.ui)
   implementation(libs.compose.material3)
+  implementation(libs.compose.material.icons.extended)
   implementation(libs.compose.ui.tooling.preview)
+  implementation(libs.compose.animation)
+  implementation(libs.compose.foundation)
+  implementation(libs.navigation.compose)
+  implementation(libs.coil.compose)
 
   implementation(libs.hilt.android)
   ksp(libs.hilt.compiler)
